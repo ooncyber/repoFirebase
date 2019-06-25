@@ -90,15 +90,7 @@ let i = 0
     $(".conversa").append(estrutura)
     
     if(i==1)
-    Push.create("Nova mensagem!", {
-    timeout: 2000,
-    vibrate: [200,100],
-    onClick: function () {
-        window.focus();
-        this.close();
-    }
-    }
-);
+    Push.create("Nova mensagem!")
   })
 
 
