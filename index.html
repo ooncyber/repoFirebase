@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang='pt-br'>
+
+<head>
+
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>INDEX</title>
+
+  <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+  <link rel=stylesheet href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
+    integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+</head>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-database.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBfbuRD6CvMZM0ECK4yxWkaujcD4BoMEFM",
+    authDomain: "demonstracao-app-curso.firebaseapp.com",
+    databaseURL: "https://demonstracao-app-curso.firebaseio.com",
+    projectId: "demonstracao-app-curso",
+    storageBucket: "",
+    messagingSenderId: "422163411420",
+    appId: "1:422163411420:web:787946dc6fb22ba0"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
+
+
+
+  var ref = firebase.database().ref('conversa')
+
+
+
+  //add
+  $(function () {
+    $("#conteudo").focus()
+    $("form").on('submit', e => {
+      e.preventDefault()
+      let valor = $("#conteudo").val()
+      $("#conteudo").val("")
+      
+
+      mensagem = {
+        mensagem: nomePessoa + ": " + valor
+      }
+
+      ref.push(mensagem)
+
+    })
+  })
+
+  function excluir(key) {
+    ref.child(key).remove()
+    // console.log(key);
+
+  }
+
+  //popula
+  ref.on('child_added', value => {
+    console.log(value, value.val(), value.key);
+    let estrutura = '<div class="linha">' + value.val()["mensagem"] + '</br>'
+    $(".conversa").append(estrutura)
+  })
+  ref.on('child_removed', value => {
+    $("#" + value.key).remove()
+
+  })
+
+
+  var nomePessoa = prompt("Digite seu nome");
+</script>
+
+<style>
+  .linha {
+    border-top: 1px solid black;
+  }
+</style>
+
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto mt-5 conteudo">
+
+        <div class="conversa bg-info mb-5">
+          <div class="display-4 text-center bg-success">Conversa</div>
+
+        </div>
+
+        <form>
+          <div class="row">
+            <div class="col-md-9">
+              <input type="text" name="conteudo" id="conteudo" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <input type='submit' class="btn btn-block btn-success" value='Enviar'>
+            </div>
+        </form>
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
