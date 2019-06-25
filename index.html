@@ -55,13 +55,13 @@
     $("#conteudo").focus()
     $("form").on('submit', e => {
       e.preventDefault()
-      let valor = $("#conteudo").val().toString().replace('<script>','sou viado')
-      $("#conteudo").val("")
-
       
-
-
-
+      let corLinha = ['blue', 'green', 'yellow', 'pink']
+      let cor = corLinha[Math.floor(Math.random() * 3)]
+      let style = "style='background-color: "+cor+"'"
+      
+      let valor = "<span "+style+">"+$("#conteudo").val().toString().replace('<script>', 'sou viado')+"</span>"
+      $("#conteudo").val("")
       mensagem = {
         mensagem: nomePessoa + ": " + valor
       }
@@ -78,8 +78,12 @@
   }
 
   //popula
+  corLinha = ['blue','green','yellow','pink']
+  cor= corLinha[Math.floor(Math.random*3)]
+  console.log(cor);
+  
   ref.on('child_added', value => {
-    console.log(value, value.val(), value.key);
+    // console.log(value, value.val(), value.key);
     let estrutura = '<div class="linha">' + value.val()["mensagem"] + '</br>'
     $(".conversa").append(estrutura)
   })
@@ -104,9 +108,8 @@
     <div class="row">
       <div class="col-md-6 mx-auto mt-5 conteudo">
 
-        <div class="conversa bg-info mb-5">
+        <div class="conversa mb-5">
           <div class="display-4 text-center bg-success">Conversa</div>
-
         </div>
 
         <form>
