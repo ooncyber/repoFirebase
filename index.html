@@ -8,7 +8,12 @@
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
   <title>INDEX</title>
 
+
   <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+
+  <script src="node_modules/push.js/bin/push.js"></script>
+  <script src="node_modules/push.js/bin/serviceWorker.min.js"></script>
+
   <link rel=stylesheet href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
     integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
 </head>
@@ -57,8 +62,6 @@
       e.preventDefault()
 
 
-      let style = "style='background-color: " + cor + "'"
-
       let valor = $("#conteudo").val().toString().replace('<script>', 'sou viado')
       $("#conteudo").val("")
       mensagem = {
@@ -66,6 +69,8 @@
       }
 
       ref.push(mensagem)
+
+
 
     })
   })
@@ -77,14 +82,20 @@
   }
 
   //popula
-  corLinha = ['blue', 'green', 'yellow', 'pink']
-  cor = corLinha[Math.floor(Math.random * 3)]
-  console.log(cor);
+
 
   ref.on('child_added', value => {
     // console.log(value, value.val(), value.key);
     let estrutura = '<div class="linha">' + value.val()["mensagem"] + '</br>'
     $(".conversa").append(estrutura)
+    Push.create("Nova mensagem!", {
+    body: "How's it hangin'?",
+    timeout: 2000,
+    onClick: function () {
+        window.focus();
+        this.close();
+    }
+});
   })
   ref.on('child_removed', value => {
     $("#" + value.key).remove()
@@ -95,6 +106,8 @@
   var nomePessoa = prompt("Digite seu nome");
   var corLinha = ['blue', 'green', 'yellow', 'pink']
   var corEscolhida = corLinha[Math.floor(Math.random() * 3)]
+
+
 </script>
 
 <style>
