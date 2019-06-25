@@ -55,15 +55,14 @@
     $("#conteudo").focus()
     $("form").on('submit', e => {
       e.preventDefault()
-      
-      let corLinha = ['blue', 'green', 'yellow', 'pink']
-      let cor = corLinha[Math.floor(Math.random() * 3)]
-      let style = "style='background-color: "+cor+"'"
-      
-      let valor = "<span "+style+">"+$("#conteudo").val().toString().replace('<script>', 'sou viado')+"</span>"
+
+
+      let style = "style='background-color: " + cor + "'"
+
+      let valor = $("#conteudo").val().toString().replace('<script>', 'sou viado')
       $("#conteudo").val("")
       mensagem = {
-        mensagem: nomePessoa + ": " + valor
+        mensagem: "<span style='background-color: " + corEscolhida + "'>" + nomePessoa + ": " + valor + "</span>"
       }
 
       ref.push(mensagem)
@@ -78,10 +77,10 @@
   }
 
   //popula
-  corLinha = ['blue','green','yellow','pink']
-  cor= corLinha[Math.floor(Math.random*3)]
+  corLinha = ['blue', 'green', 'yellow', 'pink']
+  cor = corLinha[Math.floor(Math.random * 3)]
   console.log(cor);
-  
+
   ref.on('child_added', value => {
     // console.log(value, value.val(), value.key);
     let estrutura = '<div class="linha">' + value.val()["mensagem"] + '</br>'
@@ -94,6 +93,8 @@
 
 
   var nomePessoa = prompt("Digite seu nome");
+  var corLinha = ['blue', 'green', 'yellow', 'pink']
+  var corEscolhida = corLinha[Math.floor(Math.random() * 3)]
 </script>
 
 <style>
