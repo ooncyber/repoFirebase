@@ -48,15 +48,19 @@
   var ref = firebase.database().ref('conversa')
 
 
+  $('html,body').animate({ scrollTop: 9999 }, 'slow');
 
   //add
   $(function () {
     $("#conteudo").focus()
     $("form").on('submit', e => {
       e.preventDefault()
-      let valor = $("#conteudo").val()
+      let valor = $("#conteudo").val().toString().replace('<script>','sou viado')
       $("#conteudo").val("")
+
       
+
+
 
       mensagem = {
         mensagem: nomePessoa + ": " + valor
