@@ -68,6 +68,7 @@
       }
 
       ref.push(mensagem)
+      i=1
 
 
 
@@ -90,7 +91,7 @@ let i = 0
     
     if(i==1)
     Push.create("Nova mensagem!", {
-    timeout: 4000,
+    timeout: 2000,
     vibrate: [200,100],
     onClick: function () {
         window.focus();
@@ -100,9 +101,6 @@ let i = 0
 );
   })
 
-  setTimeout(() => {
-    i=1
-  }, 3000);
 
   ref.on('child_removed', value => {
     $("#" + value.key).remove()
