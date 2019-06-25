@@ -85,20 +85,12 @@
 
 
   ref.on('child_added', value => {
-    Push.Permission.get();
     // console.log(value, value.val(), value.key);
     let estrutura = '<div class="linha">' + value.val()["mensagem"] + '</br>'
     $(".conversa").append(estrutura)
-    Push.create("Nova mensagem!", {
-    body: "How's it hangin'?",
-    timeout: 2000,
-    vibrate: 200,
-    onClick: function () {
-        window.focus();
-        this.close();
-    }
-});
+    
   })
+  
   ref.on('child_removed', value => {
     $("#" + value.key).remove()
 
