@@ -12,6 +12,7 @@
   <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 
   <script src="push.js"></script>
+  <script src="serviceWorker.min.js"></script>
 
   <link rel=stylesheet href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
     integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
@@ -68,7 +69,6 @@
       }
 
       ref.push(mensagem)
-      i=1
 
 
 
@@ -90,9 +90,15 @@ let i = 0
     $(".conversa").append(estrutura)
     
     if(i==1)
-    Push.create("Nova mensagem!")
+    Push.create("Nova mensagem!", {
+    timeout: 4000
+    }
+);
   })
 
+  setTimeout(() => {
+    i=1
+  }, 3000);
 
   ref.on('child_removed', value => {
     $("#" + value.key).remove()
